@@ -141,16 +141,17 @@ export default {
 }
 .title {
   color: #538dd5;
-  font-size: 23px;
-  line-height: 23px;
+  font-size: 25px;
+  line-height: 25px;
+  padding-top: 5px;
   padding-bottom: 10px;
   font-weight: 700;
   font-family: 'simhei', monospace;
   text-align: center;
 }
 .page-6 .title {
-  font-size: 26px;
-  line-height: 26px;
+  font-size: 30px;
+  line-height: 30px;
   padding-bottom: 13px;
 }
 .page-2 .title {
@@ -159,8 +160,8 @@ export default {
   padding-bottom: 20px;
 }
 .page-1 .title {
-  font-size: 35px;
-  line-height: 35px;
+  font-size: 40px;
+  line-height: 40px;
   padding-bottom: 20px;
 }
 .page-2 .canlendarRow + .canlendarRow {
@@ -192,6 +193,7 @@ export default {
 table {
   border-collapse: collapse;
   height: 0px;
+  width: 100%;
 }
 td {
   height: 42px;

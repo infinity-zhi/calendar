@@ -1,29 +1,31 @@
 <template>
-  <table border="0" cellpadding="0" cellspacing="0">
-    <tr>
-      <td colspan="7" class="month">{{ month }}月 {{ engMonth }}</td>
-    </tr>
-    <tr>
-      <td
-        class="week"
-        v-for="(title, titleIndex) in weeks"
-        :key="'title' + titleIndex"
-        :class="'title' + titleIndex"
-      >
-        {{ title }}
-      </td>
-    </tr>
-    <tr v-for="(week, weekIndex) in days" :key="'week' + weekIndex">
-      <Day
-        v-for="(day, dayIndex) in week"
-        :key="'day' + day"
-        :class="'day' + dayIndex"
-        :day="day"
-        :month="month"
-        :presets="presets"
-      />
-    </tr>
-  </table>
+  <div>
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td colspan="7" class="month">{{ month }}月 {{ engMonth }}</td>
+      </tr>
+      <tr>
+        <td
+          class="week"
+          v-for="(title, titleIndex) in weeks"
+          :key="'title' + titleIndex"
+          :class="'title' + titleIndex"
+        >
+          {{ title }}
+        </td>
+      </tr>
+      <tr v-for="(week, weekIndex) in days" :key="'week' + weekIndex">
+        <Day
+          v-for="(day, dayIndex) in week"
+          :key="'day' + day"
+          :class="'day' + dayIndex"
+          :day="day"
+          :month="month"
+          :presets="presets"
+        />
+      </tr>
+    </table>
+  </div>
 </template>
 
 <script>
