@@ -47,7 +47,7 @@
         </a-radio-group>
       </a-form-item>
       <a-form-item :wrapper-col="{ span: 18, offset: 6 }">
-        <a-button type="primary" html-type="submit">{{ getPdfText }}</a-button>
+        <a-button type="primary" html-type="submit">定制完毕，立即打印</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -57,31 +57,7 @@
 export default {
   name: 'Panel',
   props: ['presets'],
-  data() {
-    return {
-      api: '',
-      home: '',
-      ModalText: '马上就好，请在打开的新窗口中打印 PDF 文件 ~',
-      visible: false,
-      confirmLoading: true
-    };
-  },
-  computed: {
-    getPdfText() {
-      return this.api ? '定制完毕，下载 PDF 打印' : '定制完毕，立即打印';
-    }
-  },
   methods: {
-    handleOk() {
-      if (this.confirmLoading === false) {
-        this.visible = false;
-      }
-    },
-    handleCancel() {
-      if (this.confirmLoading === false) {
-        this.visible = false;
-      }
-    },
     year(val) {
       if (val > 2050 || val < 1990) return this.$message.error('年份必须 在 1990 - 2050 之间');
       this.$emit('setPresets', { year: val });
@@ -108,46 +84,8 @@ export default {
       this.$emit('setPresets', { paperDirection: val.target.value });
     },
     getPdf() {
-      if (!this.api) return window.print();
-
-      this.visible = true;
-      this.ModalText = '等待 5 秒后，在打开的新窗口中打印 PDF 文件 ~';
-      this.confirmLoading = true;
-      this.$request
-        .POST(this.api, this.presets)
-        .then((data) => {
-          if (!data.data.file) {
-            this.ModalText = '服务器异常，请重试！';
-            this.confirmLoading = false;
-            return;
-          }
-
-          setTimeout(() => {
-            this.confirmLoading = false;
-            let myWindow = window.open(
-              this.home + data.data.file,
-              'calendar',
-              'width=1200,height=700'
-            );
-            myWindow.focus();
-          }, 1500);
-        })
-        .catch(() => {
-          this.ModalText = '服务器异常，请重试！';
-          this.confirmLoading = false;
-        });
+      window.print();
     }
-  },
-  created() {
-    this.$request
-      .GET('/config.json')
-      .then((data) => {
-        this.api = data.api;
-        this.home = data.home;
-      })
-      .catch(() => {
-        this.api = '';
-      });
   }
 };
 </script>
